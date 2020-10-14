@@ -1,16 +1,16 @@
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = "http://localhost:3001";
 
 const LOADING = { type: "LOADING" };
 
 export const fetchCharacters = () => {
-    // thunk requires a function to be returned
+  // thunk requires a function to be returned
 
-    return (dispatch) => {
+  return (dispatch) => {
+    dispatch(LOADING);
 
-        dispatch(LOADING);
+    fetch(BASE_URL + "/characters")
+      .then((resp) => resp.json())
 
-        fetch(BASE_URL + '/characters')
-            .then(resp => resp.json())
-            .then( characters => dispatch({ type: "LOAD_CHARACTERS", characters }))
-    }
-}
+      .then((characters) => dispatch({ type: "LOAD_CHARACTERS", characters }));
+  };
+};
